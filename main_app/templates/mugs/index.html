@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Mug List</h1>
+
+{% for mug in mugs %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ mug.name }}</span>
+      <p>Color: {{ mug.color }}</p>
+      <p>Description: {{ mug.description }}</p>
+      <p>Size: {{ mug.size }}</p>
+      {% if mug.in_use %}
+        <p>In use!</p>
+      {% else %}
+        <p>Not in use</p>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
