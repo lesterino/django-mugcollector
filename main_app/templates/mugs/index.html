@@ -5,6 +5,7 @@
 
 {% for mug in mugs %}
   <div class="card">
+  <a href="{% url 'detail' mug.id %}">
     <div class="card-content">
       <span class="card-title">{{ mug.name }}</span>
       <p>Color: {{ mug.color }}</p>
@@ -16,6 +17,7 @@
         <p>Not in use</p>
       {% endif %}
     </div>
+    </a>
   </div>
 {% endfor %}
 
