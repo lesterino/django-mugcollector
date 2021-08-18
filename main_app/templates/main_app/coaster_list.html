@@ -3,8 +3,8 @@
 
 <h1>Coaster List</h1>
 
-{% for c in coaster_list %}
-  <a href="{% url 'coasters_detail' c.id %}">
+{% for coaster in coaster_list %}
+  <a href="{% url 'coasters_detail' coaster.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">Coaster {{coaster.id}} </span>
