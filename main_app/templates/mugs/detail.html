@@ -54,6 +54,8 @@
             <span class="card-title">
               <span>{{ coaster.color }}</span> {{ coaster.shape }}
             </span>
+            <br />
+            <a href="{% url 'unassoc_coaster' mug.id coaster.id %}">Remove</a>
           </div>
         </div>
       {% endfor %}

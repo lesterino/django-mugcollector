@@ -19,5 +19,6 @@ urlpatterns = [
     path('coasters/<int:pk>/delete/', views.CoasterDelete.as_view(), name='coasters_delete'),
     # associate a coaster with a mug
     path('mugs/<int:mug_id>/assoc_coaster/<int:coaster_id>/', views.assoc_coaster, name='assoc_coaster'),
+    path('mugs/<int:mug_id>/unassoc_coaster/<int:coaster_id>/', views.unassoc_coaster, name='unassoc_coaster'),
     path('accounts/signup/', views.signup, name='signup'),
 ]

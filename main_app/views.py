@@ -10,7 +10,7 @@ from .forms import DrinkForm
 
 class MugCreate(LoginRequiredMixin, CreateView):
     model = Mug
-    fields = '__all__'
+    fields = ['name', 'color', 'description', 'size', 'in_use']
     success_url = '/mugs/'
 
     def form_valid(self, form):
@@ -19,7 +19,7 @@ class MugCreate(LoginRequiredMixin, CreateView):
 
 class MugUpdate(LoginRequiredMixin, UpdateView):
     model = Mug
-    fields = '__all__'
+    fields = ['color', 'description', 'size', 'in_use']
 
 class MugDelete(LoginRequiredMixin, DeleteView):
     model = Mug
@@ -34,7 +34,6 @@ def about(request):
 @login_required
 def mugs_index(request):
     mugs = Mug.objects.filter(user=request.user)
-    mugs = request.user.mug_set.all()
     return render(request, 'mugs/index.html', { 'mugs': mugs })
 
 @login_required
@@ -89,7 +88,8 @@ def assoc_coaster(request, mug_id, coaster_id):
 
 @login_required
 def unassoc_coaster(request, mug_id, coaster_id):
-    pass
+    Mug.objects.get(id=mug_id).coasters.remove(coaster_id)
+    return redirect ('detail', mug_id=mug_id)
 
 def signup(request):
     error_message = 'L'
