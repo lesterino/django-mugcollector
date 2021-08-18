@@ -1,11 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Mug
-# from django.views.generic import ListView
-
-# class MugList(ListView):
-#     model = Mug
-# Create your views here.
+from .forms import DrinkForm
 
 def home (request):
     return render(request, 'home.html')
@@ -19,7 +15,16 @@ def mugs_index(request):
 
 def mugs_detail(request, mug_id):
     mug = Mug.objects.get(id=mug_id)
-    return render(request, 'mugs/detail.html', {'mug': mug})
+    drink_form = DrinkForm()
+    return render(request, 'mugs/detail.html', {'mug': mug, 'drink_form': drink_form})
+
+def add_drink(request, mug_id):
+    form = DrinkForm(request.POST)
+    if form.is_valid():
+        new_drink = form.save(commit=False)
+        new_drink.mug_id = mug_id
+        new_drink.save()
+    return redirect('detail', mug_id=mug_id)
 
 class MugCreate(CreateView):
     model = Mug

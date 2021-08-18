@@ -1,20 +1,29 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <!-- New if/else block -->
-  {% if object %}
-    <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
-  {% else %}
-    <h1>Add Mug</h1>
-  {% endif %}
-  <!-- Leaving the action empty makes the form post to the same url used to display it -->
-  <form action="" method="post">
-    <!-- Django requires the following for security purposes -->
-    {% csrf_token %}
-    
-      <!-- Render the inputs inside of <tr>s & <td>s -->
-      {{ form }}
-    
-    <input type="submit" value="Submit!" class="btn">
-  </form>
+{% if object %}
+<h1>Edit <span class="teal-text">{{object.name}}</span></h1>
+{% else %}
+<h1>Add Mug</h1>
+{% endif %}
+<!-- Leaving the action empty makes the form post to the same url used to display it -->
+<form action="" method="post">
+  <!-- Django requires the following for security purposes -->
+  {% csrf_token %}
+
+  <!-- Render the inputs inside of <tr>s & <td>s -->
+<tr><th><label for="id_name">Name:</label></th><td><input type="text" name="name" maxlength="100" required id="id_name"></td></tr>
+<tr><th><label for="id_color">Color:</label></th><td><input type="text" name="color" maxlength="100" required id="id_color"></td></tr>
+<tr><th><label for="id_description">Description:</label></th><td><textarea name="description" cols="40" rows="10" maxlength="250" required id="id_description">
+</textarea></td></tr>
+<tr><th><label for="id_size">Size:</label></th><td><input type="text" name="size" maxlength="100" required id="id_size"></td></tr>
+<tr><th><label for="id_in_use">In use:</th>
+<td><input type="checkbox" name="in_use" id="id_in_use"><span></span></td></label></tr>
+  
+  <p></p>
+  <input type="submit" value="Submit!" class="btn" />
+</form>
+
+<script>
+  M.AutoInit();
+</script>
 {% endblock %}

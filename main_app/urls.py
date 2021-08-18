@@ -10,4 +10,5 @@ urlpatterns = [
     path('mugs/create/', views.MugCreate.as_view(), name='mugs_create'),
     path('mugs/<int:pk>/update/', views.MugUpdate.as_view(), name='mugs_update'),
     path('mugs/<int:pk>/delete/', views.MugDelete.as_view(), name='mugs_delete'),
+    path('mugs/<int:mug_id>/add_drink/', views.add_drink, name='add_drink'),
 ]

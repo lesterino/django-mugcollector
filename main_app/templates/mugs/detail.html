@@ -8,16 +8,46 @@
     <p>Color: {{ mug.color }}</p>
     <p>Description: {{ mug.description }}</p>
     <p>Size: {{ mug.size }}</p>
-    {% comment %} {% if mug.in_use %}
+    {% if mug.in_use %}
     <p>In use!</p>
     {% else %}
     <p>Not in use</p>
-    {% endif %} {% endcomment %}
+    {% endif %}
   </div>
   <div class="card-action">
     <a href="{% url 'mugs_update' mug.id %}">Edit</a>
     <a href="{% url 'mugs_delete' mug.id %}">Delete</a>
   </div>
 </div>
+<h4>Drinks</h4>
+<div class="col s6">
+<form action="{% url 'add_drink' mug.id %}" method="POST">
+    {% csrf_token %}
+    {{ drink_form.as_p }}
+    <input type="submit" class="btn" value="Add Drink">
+  </form>
+    <table class="striped">
+      <thead>
+        <tr><th>Type</th><th>Name</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        {% for drink in mug.drink_set.all %}
+          <tr>
+            <td>{{drink.type}}</td>
+            <td>{{drink.name}}</td>
+            <td>{{drink.description}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 
+<script>
+const typeEl = document.getElementById('id_type');
+M.FormSelect.init(typeEl)
+
+
+
+</script>
 {% endblock %}

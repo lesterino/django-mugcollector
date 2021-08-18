@@ -11,11 +11,11 @@
       <p>Color: {{ mug.color }}</p>
       <p>Description: {{ mug.description }}</p>
       <p>Size: {{ mug.size }}</p>
-      {% comment %} {% if mug.in_use %}
+      {% if mug.in_use %}
         <p>In use!</p>
       {% else %}
         <p>Not in use</p>
-      {% endif %} {% endcomment %}
+      {% endif %}
     </div>
     </a>
   </div>
