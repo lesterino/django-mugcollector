@@ -10,12 +10,24 @@ DRINK_TYPES = (
     ('O', 'Other')
 )
 
+class Coaster(models.Model):
+    color = models.CharField(max_length=50)
+    shape = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.shape
+    
+    def get_absolute_url(self):
+        return reverse("coasters_detail", kwargs={"pk": self.id})
+    
+
 class Mug(models.Model):
     name = models.CharField(max_length=100)
     color = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     size = models.CharField(max_length=100)
     in_use = models.BooleanField(default=False)
+    coasters = models.ManyToManyField(Coaster)
 
     def __str__(self):
         return self.name
