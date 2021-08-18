@@ -71,7 +71,7 @@ class CoasterDetail(LoginRequiredMixin, DetailView):
 
 class CoasterCreate(LoginRequiredMixin, CreateView):
     model = Coaster
-    fields = '__all__'
+    fields = ['color', 'shape']
 
 class CoasterUpdate(LoginRequiredMixin, UpdateView):
     model = Coaster
@@ -92,7 +92,7 @@ def unassoc_coaster(request, mug_id, coaster_id):
     return redirect ('detail', mug_id=mug_id)
 
 def signup(request):
-    error_message = 'L'
+    error_message = ''
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
