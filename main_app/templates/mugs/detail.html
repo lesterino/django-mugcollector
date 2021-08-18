@@ -36,6 +36,7 @@
             <td>{{drink.type}}</td>
             <td>{{drink.name}}</td>
             <td>{{drink.description}}</td>
+            <td><a href="{% url 'delete_drink' drink.mug_id drink.id %}"> Delete </a></td>
           </tr>
         {% endfor %}
       </tbody>

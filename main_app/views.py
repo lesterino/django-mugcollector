@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Mug
+from .models import Mug, Drink
 from .forms import DrinkForm
 
 def home (request):
@@ -24,6 +24,12 @@ def add_drink(request, mug_id):
         new_drink = form.save(commit=False)
         new_drink.mug_id = mug_id
         new_drink.save()
+    return redirect('detail', mug_id=mug_id)
+
+def delete_drink(request, mug_id, drink_id):
+    mug = Mug.objects.get(id=mug_id)
+    drink = Drink.objects.get(mug_id=mug_id, id=drink_id)
+    mug.drink_set.remove(drink)
     return redirect('detail', mug_id=mug_id)
 
 class MugCreate(CreateView):

@@ -32,9 +32,9 @@ class Drink(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
 
-    mug = models.ForeignKey(Mug, on_delete=models.CASCADE)
+    mug = models.ForeignKey(Mug, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"{self.get_name_display()}"
+        return f"{self.name}"
 
     
